@@ -1,6 +1,6 @@
 {
   "name": "functionapp",
-  "version": "1.0.0",
+  "version": "2.0.0-camaratech1",
   "description": "Deploy to Azure Functions",
   "main": "lib/main.js",
   "scripts": {
