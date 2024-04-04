@@ -11,7 +11,6 @@ import { FunctionSkuConstant } from '../../src/constants/function_sku';
 import { AuthenticationType } from '../../src/constants/authentication_type';
 import { PublishMethodConstant } from '../../src/constants/publish_method';
 import { Builder } from '../../src/managers/builder';
-// import 'mocha';
 
 describe('Check ContentPreparer', function () {
   let _rootPath: string;
@@ -24,7 +23,7 @@ describe('Check ContentPreparer', function () {
 
   afterEach(() => {
     process.env = _envBackup;
-    rimraf(`${_rootPath}/tests/temp/*.zip`);
+    rimraf(`${_rootPath}/tests/temp/*.zip`, { glob: true});
   });
 
   it('should throw error if package path is not found', function () {
