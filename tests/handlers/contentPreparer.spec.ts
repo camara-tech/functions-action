@@ -11,6 +11,7 @@ import { FunctionSkuConstant } from '../../src/constants/function_sku';
 import { AuthenticationType } from '../../src/constants/authentication_type';
 import { PublishMethodConstant } from '../../src/constants/publish_method';
 import { Builder } from '../../src/managers/builder';
+// import 'mocha';
 
 describe('Check ContentPreparer', function () {
   let _rootPath: string;
@@ -147,7 +148,9 @@ describe('Check ContentPreparer', function () {
         StateConstant.PreparePublishContent, params, PackageType.folder
       );
     } catch (e) {
-      expect(e.message).to.contains('Failed to archive');
+      if (e instanceof Error) {
+        expect(e.message).to.contains('Failed to archive');
+      }
     }
   });
 
@@ -164,7 +167,9 @@ describe('Check ContentPreparer', function () {
         StateConstant.PreparePublishContent, params, PackageType.jar
       );
     } catch (e) {
-      expect(e.message).to.contains('only accepts zip or folder');
+      if (e instanceof Error) {
+        expect(e.message).to.contains('only accepts zip or folder');
+      }
     }
   });
 

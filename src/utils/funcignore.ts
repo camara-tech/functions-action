@@ -12,7 +12,7 @@ export class FuncIgnore {
         return existsSync(funcignorePath)
     }
 
-    public static readFuncignore(working_dir: string): ignore.Ignore {
+    public static readFuncignore(working_dir: string): ignore.Ignore | undefined {
         const funcignorePath: string = resolve(working_dir, '.funcignore');
         const rules: string[] = readFileSync(funcignorePath).toString().split('\n').filter(l => l.trim() !== '');
 
@@ -22,6 +22,8 @@ export class FuncIgnore {
         } catch (error) {
             Logger.Warn(`Failed to parse .funcignore: ${error}`);
         }
+
+        return undefined;
     }
 
     public static removeFilesFromFuncIgnore(working_dir: string, ignoreParser: ignore.Ignore): void {
