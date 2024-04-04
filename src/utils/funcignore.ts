@@ -1,7 +1,7 @@
 import { existsSync, readFileSync,  } from 'fs';
 import { resolve, normalize } from 'path';
 import * as glob from 'glob';
-import * as rimraf from 'rimraf';
+import { rimrafSync } from 'rimraf';
 import * as ignore from 'ignore';
 import { Logger } from './logger';
 
@@ -11,7 +11,7 @@ export class FuncIgnore {
         return existsSync(funcignorePath)
     }
 
-    public static readFuncignore(working_dir: string): ignore.Ignore {
+    public static readFuncignore(working_dir: string): ignore.Ignore | undefined {
         const funcignorePath: string = resolve(working_dir, '.funcignore');
         const rules: string[] = readFileSync(funcignorePath).toString().split('\n').filter(l => l.trim() !== '');
 
@@ -21,6 +21,8 @@ export class FuncIgnore {
         } catch (error) {
             Logger.Warn(`Failed to parse .funcignore: ${error}`);
         }
+
+        return undefined;
     }
 
     public static removeFilesFromFuncIgnore(working_dir: string, ignoreParser: ignore.Ignore): void {
@@ -35,7 +37,7 @@ export class FuncIgnore {
             const filename = name.replace(`${sanitizedWorkingDir}/`, '');
             if (ignoreParser.ignores(filename)) {
                 try {
-                    rimraf.sync(name, { maxBusyTries: 1 });
+                    rimrafSync(name);
                 } catch (error) {
                     Logger.Warn(`Failed to remove ${filename} (file defined in .gitignore)`);
                 }

@@ -1,6 +1,6 @@
 import { expect, assert } from 'chai';
 import { resolve } from 'path';
-import * as rimraf from 'rimraf';
+import { rimraf } from 'rimraf';
 import { writeFile } from 'fs-extra';
 import { PackageType, Package } from "azure-actions-utility/packageUtility";
 import { StateConstant } from '../../src/constants/state';
@@ -10,6 +10,7 @@ import { FunctionSkuConstant } from '../../src/constants/function_sku';
 import { AuthenticationType } from '../../src/constants/authentication_type';
 import { PublishMethodConstant } from '../../src/constants/publish_method';
 import { Builder } from '../../src/managers/builder';
+// import 'mocha';
 
 describe('Check ContentPreparer', function () {
   let _rootPath: string;
@@ -22,7 +23,7 @@ describe('Check ContentPreparer', function () {
 
   afterEach(() => {
     process.env = _envBackup;
-    rimraf(`${_rootPath}/tests/temp/*.zip`, (_) => {});
+    rimraf(`${_rootPath}/tests/temp/*.zip`, {});
   });
 
   it('should throw error if package path is not found', function () {
@@ -146,7 +147,9 @@ describe('Check ContentPreparer', function () {
         StateConstant.PreparePublishContent, params, PackageType.folder
       );
     } catch (e) {
-      expect(e.message).to.contains('Failed to archive');
+      if (e instanceof Error) {
+        expect(e.message).to.contains('Failed to archive');
+      }
     }
   });
 
@@ -163,7 +166,9 @@ describe('Check ContentPreparer', function () {
         StateConstant.PreparePublishContent, params, PackageType.jar
       );
     } catch (e) {
-      expect(e.message).to.contains('only accepts zip or folder');
+      if (e instanceof Error) {
+        expect(e.message).to.contains('only accepts zip or folder');
+      }
     }
   });
 
