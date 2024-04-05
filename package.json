@@ -18,13 +18,13 @@
   "license": "MIT",
   "devDependencies": {
     "@types/chai": "^4.2.14",
-    "@types/express": "^4.17.9",
+    "@types/express": "^4.17.21",
     "@types/fs-extra": "^8.1.0",
     "@types/mocha": "^8.2.3",
     "@types/node": "^16.18.0",
     "@types/q": "^1.5.2",
     "chai": "^4.2.0",
-    "express": "^4.17.1",
+    "express": "^4.19.2",
     "mocha": "^10.1.0",
     "nyc": "^15.1.0",
     "ts-node": "^9.0.0"
