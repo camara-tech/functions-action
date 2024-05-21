@@ -44,6 +44,6 @@ jobs:
         npm run coverage-report
         
     - name: 'Upload Coverage Report to CodeCov'
-      uses: codecov/codecov-action@v4.2.0
+      uses: codecov/codecov-action@v4.4.1
       with:
         token: ${{ secrets.CODECOV_TOKEN }}
