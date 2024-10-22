@@ -7,7 +7,10 @@
         "strict": false,
         "strictFunctionTypes": true,
         "noImplicitAny" : true,
-        "noUnusedParameters": true
+        "noUnusedParameters": true,
+        "types": [
+            "mocha"
+        ]
     },
     "include": ["src/**/*"],
     "exclude": ["node_modules", "**/*.spec.ts"]
